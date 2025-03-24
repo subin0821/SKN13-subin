@@ -1,0 +1,67 @@
+c:\Documents
+git clone https://github.com/kgmyhGit/SKN13.git
+
+git clone https://subin0821@github.com/subin0821/SKN13-subin.git
+
+cd SKN13
+git add .
+git commit - m "첫번째 파일 올리기"
+git push origin main
+
+(받기)
+cd SKN13
+git pull
+
+Working directory--> 내 코드가 있는 directory
+root directory --> 시작 directory(=SKN13)
+git add ---> staging area에 지정
+git commit ---> 내가 변경하려는 작업이 끝났을때! ; version upgrade/ 저장하면서 남겨놓는 이력. (무슨작업을 하는 commit인지 메세지를 남겨놓아야함.-반드시)
+--->.git에 저장됨.(알아서 저장)
+commit을 자주하는 것은 좋지 않음.
+
+- git pull : 원격에 새로 추가된 내역을 내 로컬에 받기. (컴퓨터 켜고 가장 먼저 하는것이 좋음)
+- 코드 변경 후 --> git status : 로컬 저장소의 상태 조회.
+                    --> git add : staging area(index)로 옮기기. ex) git add . ; 현재 여기 있는 거 다 처리.
+                                                                                   *. ; 특정 파일만.
+                    --> git commit : 올리기.  -m "커밋메세지" -공백있을경우는 반드시 "" 없을땐 그냥 없이 써도 됨.
+                                                       -git commit -m "두개 파일 수정"
+                    --> git push 서버이름  브랜치
+                          git push   origin    main -> git push --set-upstream origin main 로 설정하면  git push 만 입력해도 자동으로 origin main으로 push한다.
+
+ 
+
+- 내 repository
+1.파일 생성
+2.git status 확인
+3.git add
+4.git commit
+5.git push
+1-2. 생성된 파일 삭제 (같은 과정 반복)
+
+
+알고리즘-업무지식 중요.
+library(API)-미리 만들어놓은 코드--> 많이 알면 내가 직접 짜지 않아도 된다. (빠르게 만들수 있다.)
+
+
+
+
+
+conda activate (가상환경)
+
+jupyterlab
+
+pip install jupyterlab - 설치
+root directory : 02_Python
+#shift + enter --> 실행 후 다음 cell로 이동
+shell- code작성 -->실행
+#control + enter --> 실행 후 그 cell 에 머물러 있는다.
+#esc명령모드 -  a: 위에 빈 cell을 추가, b: 아래 빈 cell을 추가
+# -x: cell을 잘라내기, -v: cell을 붙여넣기.
+# -dd: cell 삭제
+  -y: cell을 **코드모드**로 변경
+  -m: cell을 *마크다운*로 변경
+---> markdown 형식에서
+                # 대제목
+                - 목록
+               ** bold체**
+                *기울림체*
