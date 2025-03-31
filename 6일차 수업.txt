@@ -1,0 +1,43 @@
+객체지향- 데이터 타입을 만드는것.
+class- 데이터 타입의 설계도
+instance - 하나의 데이터 타입에서의 값.
+init - attribute를 정의.
+
+global- heap의 객체의 주소값만 들어감.
+local(stack) - 함수가 종료되면 사라질 것들을 저장. (name age address self.->instance변수 호출.)->heap안에 있는 정보를 가져옴. 호출되는 각 객체별로 값이 바뀔 수 있음
+instance(heap)-공간(객체) 여기에 있는 name age address (attribute)->init이 끝나면 객체 생성,
+
+Initializer의 self
+-현재 만들어 지고 있는 객체를 받는다.
+메소드의 self
+-메소드를 소유한 객체를 받는다.
+p.set_info("홍길동", 20, "서울")
+def set_info(self, name, age, address): ->self는 위의 p를 받음(호출)''
+
+* 객체지향에서 중요한 3가지-캡슐화(encapsulation)
+                                       -상속(inheritance) : 기존의 것에 추가하여 새로운 class(데이터타입)을 만들겠다. (대부분의 상속관계는 계층관계이다.)
+                                       -다형성(polymorphism)
+
+상속표시는 화살표로 함.
+상위 class- 추상적 class
+하위 class- 구체적 class
+
+다중상속 -여러곳에서 상속받는 것. 
+
+*메소드 overriding (호출 방법을 통일.)
+
+상위class -> 공통적인 것 구현 (상속받은 모든 class들이 구현할 수  있도록)
+하위class -> 메소드를 상위 class에 구현을 해놓고 하위class에서 구체적으로 다시 구현.
+
+*super() ->상위 객체에 정의된것을 쓰겠다.
+
+#MRO (Method Resolution Order)- 먼저 선언한 class부터 찾는다(왼->오)
+- 왼쪽상위 class-상위class 왼쪽 상위 ->다확인시 오른쪽.
+
+class 이름.mro() -> 호출 순서를 확인.
+부모개체들은 모든 하위개체들의 type이 될 수 있다.
+ 
+
+
+
+
