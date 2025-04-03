@@ -1,0 +1,10 @@
+데이터 컬럼(행)이 모여 Table
+전체테이블을 모아 둔것이 데이터 베이스
+데이터 베이스를 만들고 데이터 베이스 안에 필요한 테이블 생성.
+
+edit->preferences-> sql editor-> queryeditor -> enable code completion in editors 해제 (자동완성 해제)
+주석 주석 : control + /
+
+설계도 표 또는 설계도면이 있음
+
+01_basic_select

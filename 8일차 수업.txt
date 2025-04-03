@@ -1,0 +1,103 @@
+raise 다음은 오류데이터 -> 오류타입은 class로 입력.
+exception 이름은 exception 또는 Error
+
+*입출력(I/O -> input/output)
+값을 입력받아서 프로그램이 처리하여 결과 값을 출력
+
+함수(파라미터)-> 파라미터 값을 처리하여 출력(return)
+
+*외부(자원 = resource) 에서 값을 프로그램으로 받아오는 것 --> Input
+*프로그램이 처리한 결과 값을 외부로 내보내는것 -->Output
+	외부자원(ex.파일, 원격컴퓨터->network)
+	파일, 원격컴퓨터 입장에서는 데이터를 보내주는 것이므로 출력하는것.
+	프로그램 중심적으로는 입력받는 것이므로 input.
+	내프로그램에 있는것을 외부로 보내주면 output.
+외부자원에서 값을 주고/받아올때 
+1.연결->파일인지 컴퓨터인지에 따라 방식(방법)만 달라질뿐 열결하는것 자체는 같음.
+2.읽기/쓰기
+3.연결닫기
+
+연결을 하려면 연결대상을 지정해줘야 함. (경로 지정)
+directory-파일명-->경로(path)
+directory 구조는 tree구조(시작은 하나(Root)에서 시작 그 안에 여러개가 들어있음=계층구조)
+
+-절대경로: root directory에서 부터 순서대로 알려주는 방식.(simple하다.but 지정코드가길다.)
+-상대경로: 현재 내위치(프로그램) 기준으로 알려주는 방식.(나의 위치에 따라 경로가 달라짐. but 지정코드가 simple)->내 현재 위치가 일정할때 사용하는 것이 좋음.
+		상대경로의 경우, rootdirectory는 표시하지 않음.
+					현재 directory표시 생략가능.(항상 현재 위치에서 부터 시작하므로) -> 절대경로로(/,C:/D:) 시작하지 않으면 상대경로.
+#현재 디렉토리(workingn directory) 학인 -> 프로그램을 실행시킨 디렉토리.
+
+운영체제와 관련된 작업을 편리하게 할 수 있도록 만들어진 함수-->OS함수
+
+#스트림 - 한쪽에 있는데이터가 다른쪽으로 흘러들어가는 흐름.
+
+주로 utx8 방식으로 encoding
+
+text encoding 방식이 아니면 binary.
+
+text는 모든 프로그램이 공통적으로 읽을 수 있는 파일. (데이터 공유의 가장 기본.)
+
+w모드 -> 새로 쓰겠다. 기존 데이터(내용)가 있으면 지우고 새로씀.(만약 파일이 없다면 만들어서 새로씀,)
+a 모드 -> 이어쓰기.
+x모드 -> 새로쓰기. but, 연결하고자 하는 파일이 기존에 있다면 exception됨.(기존에 파일이 없어지는 것을 원하지 않으면 x모드 사용)
+rt는 모드의 default 값
+목적의 default는 r
+데이터의 default t
+
+write 메소드는 r모드는 사용 불가
+reat 메소드는 r모드만 사용 가능
+
+연결되어있는 동안은 다른 프로그램이 변경할 수 없음.(but, 열어볼수는 있음)
+
+print-> 뒤에 엔터가 있으므로 엔터처리가 되지만 write는 바로 뒤에 커서가 있는 상태에서 이어서 씀,
+
+
+python에서 binary 데이터를 입출력하기 위한 type이 bytes
+유니코드로 정의 되어있지않은 이진 데이터->binary데이터
+
+원래형태를 다른형태로 바꾸는걸 encoding
+encoding한것을 다시 원래 형태로 바꿔주는 것을 decoding
+원래 형태로 복원시킬 수 있는 방식으로 해주어야 함.
+
+text는 유니코드를 이용해 encoding decoding 함.
+
+binary 데이터(ex. 이미지, 동영상, 음악파일)마다 encoding decoding방식이 다름. --> type을 하나로 통일 (= bytes:2진수 체계로 묶어둔 것,)
+a= open(파일경로, "rb")
+a.read() : bytes
+
+a = open(파일경로, "wb")
+a.write(bytes)
+
+bytes로 바꾸는 방식은 type별로 다름. 변환하는 방식 또한 type별로 다름. 
+
+실제 type을 bytes로 바꿔주고 변환하는 것 까지를 해주는 것 = pickle
+
+원데이터->bytes->write()
+저장된데이터->read()->bytes->변환
+->위작업을 해주는 것이 pickle(다양한 바이너리 데이터를 모두 읽어주는것)
+
+객체를 저장하는 과정-->직렬화
+직렬화 한것을 다시 객체화하는 것-->역직렬화
+
+dump(저장) - load(읽음)
+
+
+
+#SQL
+MySQL 설치
+홈페이지->다운로드->MySQL Community Downloads->MySQL Installer for Windows
+->custom(지정설치)-my sql server, applications- mysql workbench --> excute
+root password-1111
+Mac
+홈페이지->다운로드->MySQL Community server + MySQL Workbench Downloads
+
+SQL - 데이터 베이스에 명령을 내리기 위한 언어(데이터 저장, 수정, 삭제, 변환)
+프로그램안에서 SQL사용.
+데이터 베이스들은 대부분의 프로그램과 연동되어있음.
+데이터 분석뿐만 아니라 programing을 할때 기본적으로 필요함.
+
+workbench는 DB가 아니라 client 프로그램.
+SQL문은 대소문자 상관없음.
+
+create user 'playdata'@'localhost' identified by '1111';
+create user 'playdata'@'%' identified by '1111';
