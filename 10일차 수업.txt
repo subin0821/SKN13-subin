@@ -1,0 +1,113 @@
+01_function
+함수
+-단일행
+-다중행
+
+*결측치 함수
+ifnull (기준컬럼(값), 기본값): 기준컬럼(값)이 NULL값이면 기본값을 출력하고 NULL이 아니면 기준컬럼 값을 출력 -->결측치가 아니면 그 값을 그대로 쓰고 결측치면 기본값을 사용.
+if (조건수식, 참, 거짓): 조건수식이 True이면 참을 False이면 거짓을 출력한다. -->참 if 조건 else 거짓 True면 참 return false면 거짓 return (python 조건함수와 같음)
+
+case(when)문
+case when 조건 then 출력값
+       [when 조건 then 출력값]
+       [else 출력값]
+       end
+
+case 컬럼 when 비교값 then 출력값
+              [when 비교값 then 출력값]
+              [else 출력값]
+              end
+
+case when 조건 then 실행
+나 case문 시작한다 하고 선언 --> case
+실행-->조건이 True일때 반환할 값
+나 끝났다 하고 알려줌 --> end
+else는 들어가도 되고 안들어가도 됨.
+when은 몇개가 들어가도 괜찮음.
+
+하나의 컬럼이 있고 그 컬럼에 대하여 동등비교를 하고싶을 때 --> case 비교할 컬럼 when 비교값 then 출력값
+
+when 다음에 값이 나와야 함. 
+case salary when > 10000은 안됨,
+
+
+다중행은 묶어서 하나의 값으로 계산 --> 집계함수, 그룹함수
+
+ select avg(salary)
+
+집계함수는 전체를 가지고 함.
+but, 비슷한 것들끼리 모아서  특정 컬럼에 있는 것들을 모아서 값을 냄 --> group by 사용.
+
+sql 기본 집계함수
+-sum(): 전체합계
+  - avg(): 평균
+  - min(): 최소값
+  - max(): 최대값
+  - stddev(): 표준편차 (각각의 값들이 실제 평균과 얼마 차이가 있는지 -->편차 ,편차에 대한 평균--->표준편차
+  - variance(): 분산 표준편차의 제곱(계산할때 값을 빼야하는데 뺀값의 평균 (편차)의 평균을 내면 0이 나오므로 평균으로부터 실제값이 얼마나 떨어져있는지 보려는것이기 때문에 제곱해서 양수값으로 보여줌. (양수이든 음수이든 크게 상관없고 얼마나 떨어져있는지만 보면 되므로.) 분산에 루트 = 표준편차
+
+count만 컬럼외에 *도 사용가능
+
+- 문자타입/일시(날짜)타입: max(), min(), count()에만 사용가능
+	- 문자열 컬럼의 max(): 사전식 배열(유니코드 기준)에서 가장 마지막 문자열, min()은 첫번째 문자열. 
+           - A B  -->A가 min B가 max  / A 가  A가 min 가=max
+          - 유니코드 기반 특수문자 < 숫자 <대문자<소문자<한글
+	- 일시타입 컬럼은 오래된 값일 수록 작은 값이다.
+
+
+A라는 컬럼을 그룹별로 나눔. - 집계시에 몇개의 그룹은 빼고 일부그룹을 가지고 집계하고 싶음 -->having 절 (having 내가 집계할 그룹의 조건을 넣어줌)
+where 연산자
+
+select max(salary)
+from emp
+group by dept_name
+having 집계한 값(ex. avg(salary)) > 5000 --->집계한 값의 결과를 가지고 select에 집계함. 여기서 집계되고 나면 꼭 salary가 아니라 다른것을 집계해도 됨. but,
+                                                       --> group by에서 걸러진 것들 중에 쓸 내용을 다시 집계
+
+join
+회원-게시판 (게시판의 게시물은 회원들이 쓰므로 관계성이 있음)
+
+직원 - 부서(직원이 부서를 참조한다.)
+직원이 부서에 대한 정보를 가지고 있을 것이므로 
+직원 테이블에 부서 값은 부서테이블의 Primary key값을 넣어준다.(참조하는 테이블은 참조당하는 테이블의 primary key를 가짐) = Foreign key 설정.
+
+
+CREATE TABLE emp(
+    emp_id 	  INT PRIMARY KEY,
+    emp_name  VARCHAR(20) NOT NULL,
+    job_id 	  VARCHAR(30),-->job_id가 되고
+    mgr_id 	  INT,
+    hire_date DATE NOT NULL,
+    salary 	  DECIMAL(7,2) NOT NULL,
+    comm_pct  DECIMAL(2,2),
+    dept_id   INT, -->dept_id로 바뀜
+    CONSTRAINT fk_emp_dept FOREIGN KEY(dept_id) REFERENCES dept(dept_id) ON DELETE SET NULL, (references : 참조할 테이블 알려줌), 
+                                                                                                                (on설정 : 참조된 데이터가 삭제될 경우 null값을 넣어줄 것을 설정.) ->null을 허용하는 컬럼이여야 함.
+                                                                                                                 on delete cascate 참조된 데이터가 삭제될경우 참조하고 있는 데이터 행 전체가 삭제.
+    CONSTRAINT fk_emp_job FOREIGN KEY(job_id) REFERENCES job(job_id) ON DELETE SET NULL,
+    CONSTRAINT fk_emp_mgr FOREIGN KEY(mgr_id) REFERENCES emp(emp_id) ON DELETE SET NULL
+
+부모테이블에 있는 데이터는 자식테이블에 있는 데이터가 참조할 경우 삭제 불가.
+부모꺼는 함부로 삭제 불가.
+
+salary grade와 emp는 업무적으로 알아야하는 관계
+self 참조 -->같은 테이블 끼리의 참조관계 (물리적으로는 하나의 테이블이지만 두개의 테이블인 것 처럼 조회)
+
+한테이블안에 모든 데이터를 저장할 수 없으므로 데이터를 나눠서 관리
+중복여부 및 여러곳에서 사용되는지 안되는지에 따라 쪼개어짐.
+참조를 하는 값을 만들어주는 컬럼 (FK 컬럼)
+조회시에 알고싶은 정보가 여러테이블에 있을 경우 합쳐서 조회해야한다.( from절에서 합치는 작업이 필요함.--> join-->하나의 테이블로 만들어짐 (물리적이 아니라 잠시 조회하는 시점에만 합쳐져서 보임))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
