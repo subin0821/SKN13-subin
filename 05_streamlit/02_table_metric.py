@@ -48,7 +48,7 @@ st.header('값의 등락 출력 - st.metric()')
 
 st.metric(
     label=":blue[온도 ]",   # header/title. markdown, 이모지 shortcode, latex($, $$ 로 감싼다.), color text지원.
-    value="10°C",           # 출력할 값
+    value="10°C",           # 출력할 값 (현재값.)
     delta="1.2°C"           # metric의 등락 크기값(옵션). `+` 로 시작하거나 생략하면 오름, `-` 로 시작하면 내림.
 )
-st.metric(label="삼성전자**", value="60,600원", delta="-700원 (-1.14%)")
+st.metric(label="**삼성전자**", value="60,600원", delta="-700원 (-1.14%)")
